@@ -12,6 +12,7 @@ toolchain_type(
 
 exports_files([
     "BUILD",
+    "LICENSE",
     "MODULE.bazel",
 ])
 
