@@ -1,0 +1,21 @@
+"""Example usage of kubeconform.bzl for Kubernetes manifest validation."""
+
+module(
+    name = "kubeconform_simple_example",
+    version = "0.0.0",
+)
+
+bazel_dep(name = "platforms", version = "1.0.0")
+bazel_dep(name = "kubeconform.bzl", version = "0.0.0")
+local_path_override(
+    module_name = "kubeconform.bzl",
+    path = "../..",
+)
+
+# Register kubeconform toolchain
+kubeconform = use_extension("@kubeconform.bzl//kubeconform:extensions.bzl", "kubeconform")
+kubeconform.toolchain(version = "0.6.7")
+kubeconform.kubernetes_schemas(kubernetes_version = "1.33.5")
+use_repo(kubeconform, "kubeconform_toolchains", "kubernetes_schemas")
+
+register_toolchains("@kubeconform_toolchains//:all")

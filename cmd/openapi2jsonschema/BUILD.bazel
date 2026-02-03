@@ -1,0 +1,21 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+
+go_library(
+    name = "openapi2jsonschema_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/arkeros/kubeconform.bzl/cmd/openapi2jsonschema",
+    visibility = ["//visibility:private"],
+    deps = ["@in_yaml_go_yaml_v4//:yaml"],
+)
+
+go_binary(
+    name = "openapi2jsonschema",
+    embed = [":openapi2jsonschema_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "openapi2jsonschema_test",
+    srcs = ["main_test.go"],
+    embed = [":openapi2jsonschema_lib"],
+)
