@@ -4,26 +4,55 @@
 # Maps kind -> (group_prefix for filename, api_version)
 # Filename pattern: {kind}{-group}-{version}.json (lowercase, standalone-strict)
 _CORE_RESOURCE_TYPES = {
-    "clusterrole": ("rbac", "v1"),
-    "clusterrolebinding": ("rbac", "v1"),
+    # Core API (no group)
     "configmap": ("", "v1"),
-    "cronjob": ("batch", "v1"),
-    "daemonset": ("apps", "v1"),
-    "deployment": ("apps", "v1"),
-    "horizontalpodautoscaler": ("autoscaling", "v2"),
-    "ingress": ("networking", "v1"),
-    "job": ("batch", "v1"),
+    "endpoints": ("", "v1"),
+    "limitrange": ("", "v1"),
     "namespace": ("", "v1"),
-    "networkpolicy": ("networking", "v1"),
+    "persistentvolume": ("", "v1"),
     "persistentvolumeclaim": ("", "v1"),
     "pod": ("", "v1"),
-    "poddisruptionbudget": ("policy", "v1"),
-    "role": ("rbac", "v1"),
-    "rolebinding": ("rbac", "v1"),
+    "resourcequota": ("", "v1"),
     "secret": ("", "v1"),
     "service": ("", "v1"),
     "serviceaccount": ("", "v1"),
+    # admissionregistration.k8s.io
+    "mutatingwebhookconfiguration": ("admissionregistration", "v1"),
+    "validatingwebhookconfiguration": ("admissionregistration", "v1"),
+    # apps
+    "controllerrevision": ("apps", "v1"),
+    "daemonset": ("apps", "v1"),
+    "deployment": ("apps", "v1"),
+    "replicaset": ("apps", "v1"),
     "statefulset": ("apps", "v1"),
+    # autoscaling
+    "horizontalpodautoscaler": ("autoscaling", "v2"),
+    # batch
+    "cronjob": ("batch", "v1"),
+    "job": ("batch", "v1"),
+    # coordination.k8s.io
+    "lease": ("coordination", "v1"),
+    # discovery.k8s.io
+    "endpointslice": ("discovery", "v1"),
+    # networking.k8s.io
+    "ingress": ("networking", "v1"),
+    "ingressclass": ("networking", "v1"),
+    "networkpolicy": ("networking", "v1"),
+    # node.k8s.io
+    "runtimeclass": ("node", "v1"),
+    # policy
+    "poddisruptionbudget": ("policy", "v1"),
+    # rbac.authorization.k8s.io
+    "clusterrole": ("rbac", "v1"),
+    "clusterrolebinding": ("rbac", "v1"),
+    "role": ("rbac", "v1"),
+    "rolebinding": ("rbac", "v1"),
+    # scheduling.k8s.io
+    "priorityclass": ("scheduling", "v1"),
+    # storage.k8s.io
+    "csidriver": ("storage", "v1"),
+    "csinode": ("storage", "v1"),
+    "storageclass": ("storage", "v1"),
 }
 
 def _schema_filename(kind, group, version):

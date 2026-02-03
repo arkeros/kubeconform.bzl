@@ -27,8 +27,9 @@ def _kubeconform_test_impl(ctx):
     args = ["-strict"]
     if ctx.attr.kubernetes_version:
         args.extend(["-kubernetes-version", ctx.attr.kubernetes_version])
-    for kind in ctx.attr.skip_kinds:
-        args.extend(["-skip", kind])
+    # -skip requires comma-separated values; multiple -skip flags only use the last one
+    if ctx.attr.skip_kinds:
+        args.extend(["-skip", ",".join(ctx.attr.skip_kinds)])
     if ctx.attr.ignore_missing_schemas:
         args.append("-ignore-missing-schemas")
 
@@ -91,8 +92,9 @@ def _expect_kubeconform_failure_impl(ctx):
     args = ["-strict"]
     if ctx.attr.kubernetes_version:
         args.extend(["-kubernetes-version", ctx.attr.kubernetes_version])
-    for kind in ctx.attr.skip_kinds:
-        args.extend(["-skip", kind])
+    # -skip requires comma-separated values; multiple -skip flags only use the last one
+    if ctx.attr.skip_kinds:
+        args.extend(["-skip", ",".join(ctx.attr.skip_kinds)])
     if ctx.attr.ignore_missing_schemas:
         args.append("-ignore-missing-schemas")
     if ctx.attr.schema_locations:
